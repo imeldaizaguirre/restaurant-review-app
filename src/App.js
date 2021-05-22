@@ -35,7 +35,7 @@ componentDidMount() {
   }
 
   componentDidUpdate(){
-    const key ="key=AIzaSyD9xlyoXGBcIYm-H8uQEaAE6q_8P1dr60o";
+    const key ="key=AIzaSyAY3St2Q1qw3XCTl2by6ccsrDfL_w7LB9w";
     if(this.state.nearRestaurants === null){
       let requestNearByRestaurants = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.center.lat},${this.state.center.lng}&radius=10000&type=restaurant&${key}`
       axios.get(requestNearByRestaurants).then(response => {

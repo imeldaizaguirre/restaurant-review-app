@@ -18,23 +18,24 @@ const [hasClicked, sethasClicked] = useState(false)
 
 
 useEffect(() => {
-    const key ="key=AIzaSyAY3St2Q1qw3XCTl2by6ccsrDfL_w7LB9w&radius=50";
-    let requestPlaceImage = `https://maps.googleapis.com/maps/api/streetview?size=600x300&location=${restaurant.geometry.location.lat},${restaurant.geometry.location.lng}&heading=151.78&pitch=-0.76&key=AIzaSyAY3St2Q1qw3XCTl2by6ccsrDfL_w7LB9w`
-    let requestPlaceReviews = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?place_id=${restaurant.place_id}&fields=name,rating,reviews,geometry,formatted_phone_number&key=AIzaSyAY3St2Q1qw3XCTl2by6ccsrDfL_w7LB9w&radius=50`
+    const key ="key=AIzaSyAY3St2Q1qw3XCTl2by6ccsrDfL_w7LB9w";
+    let requestPlaceImage = `https://maps.googleapis.com/maps/api/streetview?size=600x300&location=${restaurant.geometry.location.lat},${restaurant.geometry.location.lng}&heading=151.78&pitch=-0.76&${key}`
+    let requestPlaceReviews = `https://api.allorigins.win/raw?url=https://maps.googleapis.com/maps/api/place/details/json?place_id=${restaurant.place_id}&fields=name,rating,reviews,geometry,formatted_phone_number&${key}`
 
-    // const requestOne = axios.get(requestPlaceImage);
-    // const requestTwo = axios.get(requestPlaceReviews);
+    const requestOne = axios.get(requestPlaceImage);
+    const requestTwo = axios.get(requestPlaceReviews);
 
-    // axios.all([requestOne, requestTwo]).then(axios.spread((...responses) => {
-    //     const responseOne = responses[0]
-    //     const responseTwo = responses[1]
-    //     setrestaurantImage(responseOne.config.url)
-    //     console.log("THIS IS RESPONSE TWO>>>>>>", responseTwo)
-    //     setrestaurantReviews(responseTwo.data.result)
-    //   })).catch(errors => {
-    //     // react on errors.
-    //   })
-}, [])
+    axios.all([requestOne, requestTwo]).then(axios.spread((...responses) => {
+        const responseOne = responses[0]
+        const responseTwo = responses[1]
+        setrestaurantImage(responseOne.config.url)
+        console.log("THIS IS RESPONSE TWO>>>>>>", responseTwo)
+        setrestaurantReviews(responseTwo.data.result)
+      })).catch(errors => {
+        // react on errors.
+      })
+},[])
+
 
     return (
         <div>
