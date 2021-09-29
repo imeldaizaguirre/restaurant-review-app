@@ -1,0 +1,11 @@
+.NearByRestaurants__Container {
+  width: 50%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 600px) {
+  .NearByRestaurants__Container {
+    width: 100%;
+    overflow: auto;
+  }
+}
